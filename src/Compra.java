@@ -1,23 +1,8 @@
 import java.util.Scanner;
 
-/**
- * Clase Prepara, que nos ayuda a brindarle el menu al cliente
- * y a preparar y cobrar la producto, o cobrar la pizza del cliente.
- */
 public class Compra {
     Scanner scanner = new Scanner(System.in);
 
-    /**
-     * Arreglo de enteros que nos ayuda a llevar la cuenta de cuántos ingredientes
-     * ha puesto el cliente, pues solo se puede poner 1, 2 o 3 como máximo.
-     */
-
-    /**
-     * Metodo preparaProducto que nos ayuda a preparar la producto del cliente
-     * Este es nuestro metodo decorator pues primero el cliente escoge un pan, el
-     * cuál es el chiclocentro de la producto, una vez escogido el pan lo va a
-     * "envolver" según que ingredientes desee el cliente.
-     */
     public void compraProducto() {
         System.out.println("---------------------------- Catalogo ----------------------------");
         System.out.println("Gracias por comprar con nosotros, solo tenemos lechuga");
