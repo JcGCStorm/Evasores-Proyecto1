@@ -1,9 +1,33 @@
-public class ClienteEstadounidense extends Cliente {
+public class ClienteEstadounidense implements Cliente {
 
-    public ClienteEstadounidense(String usuario, String contrasena, String nombreReal, String telefono,
-            String direccion) {
-        super(usuario, contrasena, nombreReal, telefono, direccion);
-        // TODO Auto-generated constructor stub
+    @Override
+    public String getUsuario() {
+        return "Arthur";
+    }
+
+    @Override
+    public String getContrasena() {
+        return "333221";
+    }
+
+    @Override
+    public String getNombreReal() {
+        return "Arthur Morgan";
+    }
+
+    @Override
+    public String getTelefono() {
+        return "78966652";
+    }
+
+    @Override
+    public String getDireccion() {
+        return "56 St. , Austin, Texas, U.S.A";
+    }
+
+    @Override
+    public String getNacionalidad() {
+        return "Estadounidense";
     }
 
 }
