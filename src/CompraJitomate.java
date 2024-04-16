@@ -3,14 +3,14 @@
  * Productos
  * Extiende de ObjetosCarrito
  */
-public class Lechuga extends ObjetosCarrito {
+public class CompraJitomate extends CarritoObjetos {
     /**
      * Constructor de la clase Lechuga
      * 
-     * @param pan La Productos a decorar con lechuga
+     * @param producto La Productos a decorar con lechuga
      */
-    public Lechuga(Productos pan) {
-        super(pan);
+    public CompraJitomate(Productos producto) {
+        super(producto);
     }
 
     /**
@@ -19,7 +19,7 @@ public class Lechuga extends ObjetosCarrito {
      * @return La descripción de la Productos con lechuga
      */
     public String getDescripcion() {
-        return pan.getDescripcion() + "Lechuga,";
+        return producto.getDescripcion() + "Jitomate,";
     }
 
     /**
@@ -28,7 +28,7 @@ public class Lechuga extends ObjetosCarrito {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return pan.getPrecio() + 5.5;
+        return producto.getPrecio() + 39.9;
 
     }
 

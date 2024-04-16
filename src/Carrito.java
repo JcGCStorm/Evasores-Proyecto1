@@ -16,7 +16,7 @@ public class Carrito implements Productos {
      */
     @Override
     public String getDescripcion() {
-        return "Tus Productos:";
+        return "-->";
     }
 
     /**

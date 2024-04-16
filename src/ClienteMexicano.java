@@ -1,32 +1,51 @@
 public class ClienteMexicano implements Cliente {
 
+    String usuario;              //"JuanHorse938";
+   String contrasena;           // "1234";
+   String nombreReal;           // "Juan Lopez";
+   String telefono;             // "5533456798";
+   String direccion;            // "Ciudad de Mexico, Venustiano Carranza Número 24, Lote 3, mzn 23";
+   String nacionalidad;         // "Mexicano";
+   int id;                      // 8423
+
+
+    public ClienteMexicano(String usuario, String contrasena, String nombreReal, String telefono,
+                          String direccion, String nacionalidad, int id){
+        this.usuario      = usuario;
+        this.contrasena   = contrasena;
+        this.nombreReal   = nombreReal;
+        this.telefono     = telefono;
+        this.direccion    = direccion;
+        this.nacionalidad = nacionalidad;
+        this.id           = id;
+    }
     @Override
     public String getUsuario() {
-        return "JuanHorse938";
+        return usuario;
     }
 
     @Override
     public String getContrasena() {
-        return "1234";
+        return contrasena;
     }
 
     @Override
     public String getNombreReal() {
-        return "Juan Lopez";
+        return nombreReal;
     }
 
     @Override
     public String getTelefono() {
-        return "33456798";
+        return telefono;
     }
 
     @Override
     public String getDireccion() {
-        return "Ciudad de Mexico, Venustiano Carranza Número 24, Lote 3, mzn 23";
+        return direccion;
     }
 
     @Override
     public String getNacionalidad() {
-        return "Mexicano";
+        return nacionalidad;
     }
 }

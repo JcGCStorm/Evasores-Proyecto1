@@ -3,16 +3,16 @@
  * Productoss
  * Implementa la interfaz Productos
  */
-public abstract class ObjetosCarrito implements Productos {
-    protected Productos pan;
+public abstract class CarritoObjetos implements Productos {
+    protected Productos producto;
 
     /**
      * Constructor de la clase ObjetosCarrito
      * 
-     * @param pan La Productos a decorar con ingredientes
+     * @param producto La Productos a decorar con ingredientes
      */
-    public ObjetosCarrito(Productos pan) {
-        this.pan = pan;
+    public CarritoObjetos(Productos producto) {
+        this.producto = producto;
 
     }
 
@@ -22,7 +22,7 @@ public abstract class ObjetosCarrito implements Productos {
      * @return La descripción de la Productos decorada con ingredientes
      */
     public String getDescripcion() {
-        return pan.getDescripcion();
+        return producto.getDescripcion();
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class ObjetosCarrito implements Productos {
      * @return El precio de la Productos decorada con ingredientes
      */
     public double getPrecio() {
-        return pan.getPrecio();
+        return producto.getPrecio();
     }
 
 }
