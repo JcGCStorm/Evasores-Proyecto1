@@ -3,6 +3,8 @@
  */
 public interface Productos {
 
+    public String getNombre();
+
     /**
      * Obtiene la descripción de la baguette
      * 
@@ -16,4 +18,6 @@ public interface Productos {
      * @return El precio de la baguette
      */
     public double getPrecio();
+
+    public String getCodigoBarras();
 }

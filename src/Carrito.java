@@ -16,7 +16,7 @@ public class Carrito implements Productos {
      */
     @Override
     public String getDescripcion() {
-        return "-->";
+        return "----> ";
     }
 
     /**
@@ -27,5 +27,15 @@ public class Carrito implements Productos {
     @Override
     public double getPrecio() {
         return 0.0;
+    }
+
+    @Override
+    public String getCodigoBarras() {
+        return "";
+    }
+
+    @Override
+    public String getNombre() {
+        return "Carrito";
     }
 }

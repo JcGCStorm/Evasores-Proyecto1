@@ -48,4 +48,9 @@ public class ClienteMexicano implements Cliente {
     public String getNacionalidad() {
         return nacionalidad;
     }
+
+    @Override
+    public int getID() {
+        return id;
+    }
 }

@@ -32,4 +32,16 @@ public class CompraLaptop extends CarritoObjetos {
 
     }
 
+    @Override
+    public String getCodigoBarras() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+    }
+
+    @Override
+    public String getNombre() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+    }
+
 }

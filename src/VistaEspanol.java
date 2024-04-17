@@ -7,15 +7,13 @@ public class VistaEspanol implements VistaCliente {
     private String decisionCatalogo = "¿Qué te gustaria hacer ahora, tío? \n 1. Vovler\n" +
             "2. Salir";
 
-    private String productos() {
-        return "Hey muy buenas a toodos guaaapisismos bienvenidos a la \n" +
+    private String saludo = "Hey muy buenas a toodos guaaapisismos bienvenidos a la \n" +
                 "tienda CheemsMart, aquí tenemos todas las novedades del producto\n" +
                 "Mexicano que tanto os gusta.";
-    }
 
     @Override
     public String mostrarSaludo() {
-        return espacio + "\n" + productos() + "\n" + espacio + "\n";
+        return espacio + "\n" + saludo + "\n" + espacio + "\n";
     }
 
     @Override

@@ -10,4 +10,6 @@ public interface Cliente {
     String getDireccion();
 
     String getNacionalidad();
+
+    int getID();
 }

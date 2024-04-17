@@ -50,6 +50,7 @@ public class ClienteEstadounidense implements Cliente {
         return nacionalidad;
     }
 
+    @Override
     public int getID(){
         return id;
     }

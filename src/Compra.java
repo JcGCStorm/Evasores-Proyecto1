@@ -1,8 +1,12 @@
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Compra {
     Scanner scanner = new Scanner(System.in);
     ZMAINCHEEMS main = new ZMAINCHEEMS();
+    CatalogoElectrodom electro = new CatalogoElectrodom();
+    CatalogoElectronica electronica = new CatalogoElectronica();
+    CatalogoFrutasYVer frutasYVer = new CatalogoFrutasYVer();
 
     public Boolean compraProducto(String opcionUsuario) {
         Productos producto;
@@ -10,27 +14,7 @@ public class Compra {
         if (producto != null) {
             boolean ponmeMas = true;
             while (ponmeMas) {
-                System.out.println(
-                        "================================== Catalogo ==========================================");
-                System.out.println("Gracias por comprar con nosotros, espero encuentre todo lo que necesite :)");
-                System.out.println("Thank you for choosing us, we hope that you find everything you need :)");
-                System.out.println("\nElige tus productos (o presiona 0 para finalizar):");
-                System.out.println("Choose your products (or press 0 to quit):\n");
-                System.out.println("---------------------------- Frutas y Verduras ----------------------------");
-                System.out.println("1. Lechuga ($5.50)");
-                System.out.println("2. Jitomate 1kg ($39.90)");
-                System.out.println("3. Manzana 1kg ($36.90)\n");
-                System.out.println("---------------------------- Electrónica ----------------------------");
-                System.out.println("4. TV Hisense 43 Pulgadas Full ($5,199.0)");
-                System.out.println("5. Nintendo Zwitch ($7,790.0)");
-                System.out.println("6. Laptop HP Procesador AMD Ryzen 3 8GB RAM 512GB SSD 15.6 Pulgadas($10,299.0)");
-                System.out.println("---------------------------- Electrodomésticos ----------------------------");
-                System.out.println("7. Lavadora Midea Doble Tina 11 Kg Blanca ($3690.0)");
-                System.out.println("8. Ventilador de Piso Taurus 20 Pulgadas ($889.0)");
-                System.out.println(
-                        "9. Combo Oster 4 Elementos, Licuadora, Cafetera, Batidora y Plancha Rojo ($2,369.9.0)");
-                System.out.println("0. Pagar/ Pay");
-                System.out.println("==========================================================================");
+                catalogoCompra();
                 int productoEleccion = scanner.nextInt();
                 if (productoEleccion == 0) {
                     ponmeMas = false;
@@ -86,27 +70,44 @@ public class Compra {
         return imprimirTicket(producto, opcionUsuario);
     }
 
+    public void catalogoCompra(){
+        System.out.println("================================== Catalogo ==========================================");
+        System.out.println("Gracias por comprar con nosotros, espero encuentre todo lo que necesite :)");
+        System.out.println("Thank you for choosing us, we hope that you find everything you need :)");
+        System.out.println("\nElige tus productos (o presiona 10 para cancelar la compra.):");
+        System.out.println("Choose your products (or press 10 to cancel the order.):");
+        System.out.println("---------------------------- Frutas y Verduras ----------------------------");
+        printMenu(frutasYVer.getArreglo().iterator());
+        System.out.println("---------------------------- Electrónica ----------------------------");
+        printMenu(electronica.getArreglo().iterator());
+           System.out.println("\n ---------------------------- Electrodomésticos ----------------------------");
+        printMenu(electro.getArreglo().iterator());
+        System.out.println("10. Cancelar la compra/ Cancel the order.");
+                System.out.println("0. Pagar/ Pay");
+                System.out.println("==========================================================================");
+    }
+    
+      /**
+       * Método auxiliar para la estructura del menu
+       */
+        private void printMenu(Iterator<Productos> iterador){
+            while (iterador.hasNext()){
+                Productos menuItem = iterador.next();
+                System.out.println("ID:" + menuItem.getCodigoBarras() + menuItem.getNombre());
+            }
+        }
+
     public Boolean mostrarCatalogo(String opcionUsuario, ZMAINCHEEMS main) {
         System.out.println("============================= Catalogo ====================================");
         System.out.println("\nTenemos una gran variedad de productos aquí en CheemSmart.");
         System.out.println("We have a wide variety of products here at CheemSmart.\n");
         System.out.println("---------------------------- Frutas y Verduras ----------------------------");
-        System.out.println("1. Lechuga ($5.50)");
-        System.out.println("2. Jitomate 1kg ($39.90)");
-        System.out.println("3. Manzana 1kg ($36.90)\n");
+        printMenu(frutasYVer.getArreglo().iterator());
         System.out.println("---------------------------- Electrónica ----------------------------");
-        System.out.println("4. TV Hisense 43 Pulgadas Full ($5,199.0)");
-        System.out.println("5. Nintendo Zwitch ($7,790.0)");
-        System.out.println("6. Laptop HP Procesador AMD Ryzen 3 8GB RAM 512GB SSD 15.6 Pulgadas($10,299.0)\n");
-        System.out.println("---------------------------- Electrodomésticos ----------------------------");
-        System.out.println("7. Lavadora Midea Doble Tina 11 Kg Blanca ($3690.0)");
-        System.out.println("8. Ventilador de Piso Taurus 20 Pulgadas ($889.0)");
-        System.out.println(
-                "9. Combo Oster 4 Elementos, Licuadora, Cafetera, Batidora y Plancha Rojo ($2,369.9.0)");
-        System.out.println("10. Cancelar la compra/ Cancel the order.");
-        System.out.println("0. Salir/Quit");
+        printMenu(electronica.getArreglo().iterator());
+           System.out.println("\n ---------------------------- Electrodomésticos ----------------------------");
+        printMenu(electro.getArreglo().iterator());
         System.out.println("==========================================================================");
-
         return opcionesCatalogo(opcionUsuario, main);
     }
 
@@ -180,7 +181,7 @@ public class Compra {
                 System.out.println(main.despedir());
                 break;
             case "cancelado":
-                System.out.println("######Has cancelado tu compra./You just canceled your order.######");
+                System.out.println("###### Has cancelado tu compra./You just canceled your order.######");
                 imprimir = false;
                 break;
             default:

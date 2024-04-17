@@ -31,4 +31,14 @@ public class CompraVentilador extends CarritoObjetos {
         return producto.getPrecio() + 889.0;
     }
 
+    @Override
+    public String getCodigoBarras() {
+        return "1982. ";
+    }
+
+    @Override
+    public String getNombre() {
+        return "Ventilador de Piso Taurus 20 Pulgadas ($889.0)";
+    }
+
 }

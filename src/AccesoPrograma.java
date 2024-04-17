@@ -40,17 +40,6 @@ public class AccesoPrograma {
         }
     }
 
-    public Boolean contieneContrasena(String opcionContrasena) {
-        if (contrasenas.contains(opcionContrasena)) {
-            Boolean encontrado = true;
-            return encontrado;
-        } else {
-            System.out.println("Contraseña incorrecta, tienes dos intentos más.");
-            Boolean encontrado = false;
-            return encontrado;
-        }
-    }
-
     public Cliente regresaCliente(int i) {
         switch (i) {
             case 1:

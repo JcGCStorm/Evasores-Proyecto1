@@ -32,4 +32,14 @@ public class CompraTV extends CarritoObjetos {
 
     }
 
+    @Override
+    public String getCodigoBarras() {
+        return "2093. ";
+    }
+
+    @Override
+    public String getNombre() {
+        return "Television";
+    }
+
 }

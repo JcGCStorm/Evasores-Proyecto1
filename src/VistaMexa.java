@@ -6,15 +6,14 @@ public class VistaMexa implements VistaCliente {
     private String decisionCatalogo = "¿Qué quieres hacer ahora, apá? \n 1. Al rato paso (Volver atrás)." +
             "\n 2. Escapar de LATAM (Salir del programa)";
 
-    private String productos() {
-        return "Pasele güerita, acá tenemos de todo, casi como en el centro pero desde la comodidad\n" +
+    private String saludo = "Pasele güerita, acá tenemos de todo, casi como en el centro pero desde la comodidad\n" +
                 "de su linda casa. Espero que encuentre lo que busca aquí en CheemSmart, recuerde que\n" +
                 "hoy no fiamos pero mañana si, pregunte sin miedo.";
-    }
+
 
     @Override
     public String mostrarSaludo() {
-        return espacio + "\n" + productos() + "\n" + espacio + "\n";
+        return espacio + "\n" + saludo + "\n" + espacio + "\n";
     }
 
     @Override

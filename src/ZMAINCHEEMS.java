@@ -96,7 +96,7 @@ public class ZMAINCHEEMS {
                 Compra preparab = new Compra();
                 catalogoBool = preparab.compraProducto(opcionUsuario);
             } else if (opcion2 == 3) {
-                System.out.println(main.despedir());
+                catalogoBool = true;
             } else {
                 System.out.println("No seleccionaste una opción válida ):");
             }

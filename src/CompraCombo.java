@@ -32,4 +32,14 @@ public class CompraCombo extends CarritoObjetos {
 
     }
 
+    @Override
+    public String getCodigoBarras() {
+        return "3212. ";
+    }
+
+    @Override
+    public String getNombre() {
+        return "Combo Oster 4 Elementos, Licuadora, Cafetera, Batidora y Plancha Rojo ($2,369.9.0)";
+    }
+
 }
