@@ -57,4 +57,8 @@ public class CompraLechuga extends CarritoObjetos {
         return "Una Lechuga.                                                 ($5.50)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Frutas y Verduras";
+    }
 }

@@ -56,4 +56,9 @@ public class CompraVentilador extends CarritoObjetos {
         return "Ventilador de Piso Taurus 20 Pulgadas.                       ($889.00)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Electrodomesticos";
+    }
+
 }

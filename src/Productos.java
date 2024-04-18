@@ -4,9 +4,9 @@
 public interface Productos {
 
     /**
-     * Obtiene el nombre del producto
+     * Obtiene el precio del producto
      * 
-     * @return El nombre del producto
+     * @return El precio del producto
      */
     public String getNombre();
 
@@ -30,4 +30,6 @@ public interface Productos {
      * @return El codigo de barras del producto
      */
     public String getCodigoBarras();
+
+    public String getDepartamento();
 }

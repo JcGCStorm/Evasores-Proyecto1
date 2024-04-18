@@ -57,4 +57,9 @@ public class CompraLavadora extends CarritoObjetos {
         return "Lavadora Midea Doble Tina 11 Kg Blanca.                      ($3690.0)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Electrodomesticos";
+    }
+
 }

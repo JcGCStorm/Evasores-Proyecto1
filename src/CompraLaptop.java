@@ -57,4 +57,9 @@ public class CompraLaptop extends CarritoObjetos {
         return "Laptop HP, con procesador Ryzen 3, 8GB de RAM.               ($10,299.00)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Electronicos";
+    }
+
 }

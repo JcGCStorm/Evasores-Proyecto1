@@ -57,4 +57,9 @@ public class CompraCombo extends CarritoObjetos {
         return "Combo 4 Elementos, Licuadora, Cafetera, Batidora y Plancha.  ($2,369.90)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Electrodomesticos";
+    }
+
 }

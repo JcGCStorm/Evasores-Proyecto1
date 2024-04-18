@@ -57,4 +57,8 @@ public class CompraTV extends CarritoObjetos {
         return "Television Hisense 43 Pulgadas.                              ($5,199.00)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Electronicos";
+    }
 }

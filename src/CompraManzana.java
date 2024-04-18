@@ -56,5 +56,9 @@ public class CompraManzana extends CarritoObjetos {
     public String getNombre() {
         return "1 kg de Manzana Roja.                                        ($36.90)";
     }
-
+    
+    @Override
+    public String getDepartamento() {
+        return "Frutas y Verduras";
+    }
 }

@@ -56,4 +56,9 @@ public class CompraJitomate extends CarritoObjetos {
         return "1 kg de Jitomate.                                            ($39.90)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Frutas y Verduras";
+    }
+
 }

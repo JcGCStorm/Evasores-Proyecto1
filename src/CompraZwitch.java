@@ -57,4 +57,9 @@ public class CompraZwitch extends CarritoObjetos {
         return "Nientiendo Zwitch.                                           ($7,790.00)";
     }
 
+    @Override
+    public String getDepartamento() {
+        return "Electronicos";
+    }
+
 }
