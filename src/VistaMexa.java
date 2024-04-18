@@ -33,8 +33,7 @@ public class VistaMexa implements VistaCliente {
 
     @Override
     public String completarCompra() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'completarCompra'");
+        return "¿Deseas proceder al pago? (simon/nel)";
     }
 
     @Override

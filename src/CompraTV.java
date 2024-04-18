@@ -28,7 +28,13 @@ public class CompraTV extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 5199.0;
+        if (VistaGringo.OfertaElectronicos() == true) {
+            precio = producto.getPrecio() + (5199.00 / 5) * 4;
+
+        } else {
+            precio = producto.getPrecio() + 5199.00;
+        }
+        return precio;
 
     }
 
@@ -39,7 +45,7 @@ public class CompraTV extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "Television.                                                  ($5,199.00)";
+        return "Television Hisense 43 Pulgadas.                               ($5,199.00)";
     }
 
 }

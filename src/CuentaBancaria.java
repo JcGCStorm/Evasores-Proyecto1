@@ -5,6 +5,7 @@
 
 public class CuentaBancaria {
     private double saldo;
+    private String clave;
     // Usuario usuario;
 
     /**
@@ -12,8 +13,9 @@ public class CuentaBancaria {
      * 
      * @param saldoInicial El saldo inicial de la cuenta bancaria
      */
-    public CuentaBancaria(double saldoInicial) {
+    public CuentaBancaria(double saldoInicial, String clave) {
         this.saldo = saldoInicial;
+        this.clave = clave;
     }
 
     /**
@@ -23,6 +25,15 @@ public class CuentaBancaria {
      */
     public double getSaldo() {
         return saldo;
+    }
+
+    /**
+     * Obtiene la clave de la cuenta bancaria
+     * 
+     * @return La clave de la cuenta bancaria
+     */
+    public String getClave() {
+        return clave;
     }
 
     /**

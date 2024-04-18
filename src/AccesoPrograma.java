@@ -5,13 +5,13 @@ public class AccesoPrograma {
     // Crear la lista de clientes
     Cliente mexicano = new ClienteMexicano("JuanHorse938", "1234", "Juan Lopez", "5533456798",
             "Ciudad de Mexico, Venustiano Carranza Número 24, Lote 3, mzn 23",
-            "Mexicano", 8423, new CuentaBancaria(1900.6));
+            "Mexicano", 8423, new CuentaBancaria(1900.6, "chilepiquin"));
     Cliente espanol = new ClienteEspanol("CdeCiencia", "vivaEspana", "Samuel de Luque", "+34-83494854",
             "Avenida YT, calzada mojang número 22, Andorra",
-            "Español", 0777, new CuentaBancaria(9000));
+            "Español", 0777, new CuentaBancaria(9000, "motomami"));
     Cliente estadounidense = new ClienteEstadounidense("Arthur", "333221", "Arthur Morgan", "78966652",
             "56 St. , Austin, Texas, U.S.A",
-            "Estadounidense", 1899, new CuentaBancaria(100000));
+            "Estadounidense", 1899, new CuentaBancaria(100000, "capybara"));
     ArrayList<Cliente> clientes = new ArrayList<>();
     ArrayList<String> contrasenas = new ArrayList<>();
 
@@ -32,8 +32,13 @@ public class AccesoPrograma {
 
     public Boolean contieneUsuario(String opcionUsuario) {
         for (Cliente cliente : clientes) {
-            if (cliente.getUsuario().equals(opcionUsuario)) {
-                return true;
+            try {
+                if (cliente.getUsuario().equals(opcionUsuario)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                if (!(cliente.getUsuario().equals(opcionUsuario)))
+                    System.out.println("Nombre de usuario incorrecto.");
             }
         }
         return false;

@@ -5,6 +5,7 @@
  */
 public abstract class CarritoObjetos implements Productos {
     protected Productos producto;
+    protected double precio;
 
     /**
      * Constructor de la clase CarritoObjetos
@@ -31,7 +32,7 @@ public abstract class CarritoObjetos implements Productos {
      * @return El precio de la Productos decorada con ingredientes
      */
     public double getPrecio() {
-        return producto.getPrecio();
+        return precio;
     }
 
 }

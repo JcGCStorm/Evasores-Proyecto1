@@ -28,7 +28,13 @@ public class CompraLavadora extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 3690.0;
+        if (VistaEspanol.OfertaElectrodomesticos() == true) {
+            precio = producto.getPrecio() + (3690.00 / 5) * 4;
+
+        } else {
+            precio = producto.getPrecio() + 3690.00;
+        }
+        return precio;
 
     }
 
@@ -41,7 +47,5 @@ public class CompraLavadora extends CarritoObjetos {
     public String getNombre() {
         return "Lavadora Midea Doble Tina 11 Kg Blanca.                      ($3690.0)";
     }
-
-
 
 }

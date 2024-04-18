@@ -28,7 +28,13 @@ public class CompraVentilador extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 889.0;
+        if (VistaEspanol.OfertaElectrodomesticos() == true) {
+            precio = producto.getPrecio() + (889.00 / 5) * 4;
+
+        } else {
+            precio = producto.getPrecio() + 889.00;
+        }
+        return precio;
     }
 
     @Override
@@ -38,7 +44,7 @@ public class CompraVentilador extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "Ventilador de Piso Taurus 20 Pulgadas.                       ($889.0)";
+        return "Ventilador de Piso Taurus 20 Pulgadas.                       ($889.00)";
     }
 
 }

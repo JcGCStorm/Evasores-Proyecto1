@@ -28,7 +28,13 @@ public class CompraCombo extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 2369.9;
+        if (VistaEspanol.OfertaElectrodomesticos() == true) {
+            precio = producto.getPrecio() + (2369.90 / 5) * 4;
+
+        } else {
+            precio = producto.getPrecio() + 2369.90;
+        }
+        return precio;
 
     }
 
@@ -39,7 +45,7 @@ public class CompraCombo extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "Combo 4 Elementos, Licuadora, Cafetera, Batidora y Plancha.  ($2,369.9.0)";
+        return "Combo 4 Elementos, Licuadora, Cafetera, Batidora y Plancha.  ($2,369.90)";
     }
 
 }

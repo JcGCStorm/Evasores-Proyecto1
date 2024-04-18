@@ -28,7 +28,13 @@ public class CompraManzana extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 36.9;
+        if (VistaMexa.OfertaAlimentos() == true) {
+            precio = producto.getPrecio() + (36.90 / 4) * 3;
+
+        } else {
+            precio = producto.getPrecio() + 36.90;
+        }
+        return precio;
 
     }
 
@@ -39,7 +45,7 @@ public class CompraManzana extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "1 kg de Manzana.                                             ($36.9)";
+        return "1 kg de Manzana.                                             ($36.90)";
     }
 
 }

@@ -1,25 +1,26 @@
 import java.util.Iterator;
 import java.util.Scanner;
-import java.rmi.*;
-import java.rmi.server.*;
+import java.io.Serializable;
 
-public class Compra {
+public class Compra implements Serializable, CatalogoRemoto {
     Scanner scanner = new Scanner(System.in);
     ZMAINCHEEMS main = new ZMAINCHEEMS();
     AccesoPrograma acceso = new AccesoPrograma();
-    CatalogoElectrodom electrodom = new CatalogoElectrodom();
-    CatalogoElectronica electronica = new CatalogoElectronica();
-    CatalogoFrutasYVer frutasYVer = new CatalogoFrutasYVer();
     CuentaBancariaProxy cuentaProxy;
-    private AccesoPrograma accesoPrograma;
+
+    public Compra(String opcionUsuario, ZMAINCHEEMS main) {
+
+    }
 
     public Boolean compraProducto(String opcionUsuario) {
         Productos producto;
         producto = new Carrito();
         if (producto != null) {
             boolean ponmeMas = true;
+            Compra compra = new Compra(opcionUsuario, main);
+            CatalogoProxy catalogoRemoto = new CatalogoProxy(compra);
             while (ponmeMas) {
-                catalogoCompra();
+                catalogoRemoto.catalogoCompra();
                 try {
                     int productoEleccion = scanner.nextInt();
                     if (productoEleccion == 0) {
@@ -64,9 +65,10 @@ public class Compra {
                                 break;
                             case 10:
                                 opcionUsuario = "cancelado";
+                                imprimirTicket(producto, opcionUsuario);
+                                return false;
                             case 0:
                                 ponmeMas = false;
-                                break;
                             default:
                                 System.out.println("No seleccionaste una opción válida ):");
                         }
@@ -77,58 +79,189 @@ public class Compra {
                     ponmeMas = false;
                 }
             }
-
-            System.out.println("¿Deseas proceder al pago? (s/n)");
-            String respuesta = scanner.next();
-            if (respuesta.equalsIgnoreCase("s")) {
-                return pagar(producto, opcionUsuario);
-            } else {
-                System.out.println("Compra cancelada.");
-                return false;
+            Cliente usuario = acceso.obtenerCliente((opcionUsuario));
+            String nacionalidad = usuario.getNacionalidad();
+            switch (nacionalidad) {
+                case "Estadounidense":
+                    ZMAINCHEEMS mainAr = new ZMAINCHEEMS();
+                    mainAr.cambiaVista(new VistaGringo());
+                    System.out.println(mainAr.completarCompra());
+                    String respuesta = scanner.next();
+                    if (respuesta.equalsIgnoreCase("yes")) {
+                        return pagar(producto, opcionUsuario);
+                    } else if (respuesta.equalsIgnoreCase("no")) {
+                        System.out.println("purchase cancelled.");
+                        return false;
+                    } else {
+                        System.out.println("it's so difficult to put Yes or no?");
+                        return false;
+                    }
+                case "Mexicano":
+                    ZMAINCHEEMS mainJu = new ZMAINCHEEMS();
+                    mainJu.cambiaVista(new VistaMexa());
+                    System.out.println(mainJu.completarCompra());
+                    String respuestaJ = scanner.next();
+                    if (respuestaJ.equalsIgnoreCase("simon")) {
+                        return pagar(producto, opcionUsuario);
+                    } else if (respuestaJ.equalsIgnoreCase("nel")) {
+                        System.out.println("Chales, cancelaste tu compra.");
+                        return false;
+                    } else {
+                        System.out.println("¿simon o nel? No es tan dificil escribir.");
+                        return false;
+                    }
+                case "Español":
+                    ZMAINCHEEMS mainCd = new ZMAINCHEEMS();
+                    mainCd.cambiaVista(new VistaEspanol());
+                    System.out.println(mainCd.completarCompra());
+                    String respuestaEs = scanner.next();
+                    if (respuestaEs.equalsIgnoreCase("sip")) {
+                        return pagar(producto, opcionUsuario);
+                    } else if (respuestaEs.equalsIgnoreCase("nop")) {
+                        System.out.println("Compra cancelada.");
+                        return false;
+                    } else {
+                        System.out.println("¿Para que pides entonces? Eso no se hace tio :(.");
+                        return false;
+                    }
+                default:
+                    break;
             }
+
         }
-        // return imprimirTicket(producto, opcionUsuario);
         return false;
-        // return pagar(producto, opcionUsuario);
     }
 
     public Boolean pagar(Productos comida, String opcionUsuario) {
         AccesoPrograma accesoPrograma = new AccesoPrograma();
+        System.out.println("Bienvenido a la pantalla de CompraSegura / Welcome to the SafeShop screen");
 
         Cliente cliente = accesoPrograma.obtenerCliente((opcionUsuario));
         if (cliente == null) {
-            System.out.println("Usuario no encontrado.");
+            System.out.println("Usuario no encontrado / User not found");
             return false;
         }
 
-        double total = comida.getPrecio();
-        System.out.println("Total a pagar: $" + total);
-        System.out.println("Ingrese su contraseña: ");
-        String contrasena = scanner.next();
+        if (cliente.getNacionalidad().equals("Mexicano")) {
 
-        if (contrasena.equals(cliente.getContrasena())) {
+            double total = comida.getPrecio();
+            System.out.println("Orale, tu total a pagar es de: $" + total);
+            System.out.println("Ingresa nuevamente la contraseña de tu usuario de la tienda: ");
+            String contrasena = scanner.next();
 
-            cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
+            if (contrasena.equals(cliente.getContrasena())) {
 
-            if (cuentaProxy.getSaldo() >= total) {
-                cuentaProxy.realizarPago(total);
+                cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
 
-                // aqui puede pedir contraseña de la cuenta
-                System.out.println("Pago realizado con éxito.");
-                // cliente.getCuentaBancaria().actualizarSaldo(cuentaProxy.getSaldo());
-                cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
-                return imprimirTicket(comida, opcionUsuario);
+                if (cuentaProxy.getSaldo() >= total) {
+                    System.out.println("Ingrese la clave de tu cuenta porfa: ");
+                    String clave = scanner.next();
+                    cuentaProxy.setClave(clave);
+
+                    if (cuentaProxy.verificarClave()) {
+                        cuentaProxy.realizarPago(total);
+                        System.out.println("Pago realizado exitosamente, requetebien.");
+                        cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
+                        return imprimirTicket(comida, opcionUsuario);
+                    } else {
+                        System.out.println("Chale, parece que te equivocaste");
+
+                    }
+
+                } else {
+                    System.out.println("Saldo insuficiente en tu cuenta bancaria.");
+                    return false;
+                }
+                return false;
             } else {
-                System.out.println("Saldo insuficiente en su cuenta bancaria.");
+                System.out.println("Chin, contraseña de usuario incorrecta.");
                 return false;
             }
-        } else {
-            System.out.println("Contraseña incorrecta.");
-            return false;
+
         }
+
+        if (cliente.getNacionalidad().equals("Español")) {
+
+            double total = comida.getPrecio();
+            System.out.println("Ostras, tu total a pagar es de: $" + total);
+            System.out.println("Ingresa nuevamente la contraseña de tu usuario de la tienda: ");
+            String contrasena = scanner.next();
+
+            if (contrasena.equals(cliente.getContrasena())) {
+
+                cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
+
+                if (cuentaProxy.getSaldo() >= total) {
+                    System.out.println("Ingrese la clave de tu cuenta: ");
+                    String clave = scanner.next();
+                    cuentaProxy.setClave(clave);
+
+                    if (cuentaProxy.verificarClave()) {
+                        cuentaProxy.realizarPago(total);
+                        System.out.println("Pago realizado exitosamente, que guay.");
+                        cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
+                        return imprimirTicket(comida, opcionUsuario);
+                    } else {
+                        System.out.println("Que lío, parece que te equivocaste");
+
+                    }
+
+                } else {
+                    System.out.println("Saldo insuficiente en tu cuenta bancaria.");
+                    return false;
+                }
+                return false;
+            } else {
+                System.out.println("Chin, contraseña de usuario incorrecta.");
+                return false;
+            }
+
+        }
+
+        if (cliente.getNacionalidad().equals("Estadounidense")) {
+
+            double total = comida.getPrecio();
+            System.out.println("Your total to pay is: $" + total);
+            System.out.println("Enter your store user password again:");
+            String contrasena = scanner.next();
+
+            if (contrasena.equals(cliente.getContrasena())) {
+
+                cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
+
+                if (cuentaProxy.getSaldo() >= total) {
+                    System.out.println("Enter your account password: ");
+                    String clave = scanner.next();
+                    cuentaProxy.setClave(clave);
+
+                    if (cuentaProxy.verificarClave()) {
+                        cuentaProxy.realizarPago(total);
+                        System.out.println("Payment made successfully");
+                        cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
+                        return imprimirTicket(comida, opcionUsuario);
+                    } else {
+                        System.out.println("What a mess, it seems you were wrong");
+
+                    }
+
+                } else {
+                    System.out.println("Insufficient balance in your bank account.");
+                    return false;
+                }
+                return false;
+            } else {
+                System.out.println("Incorrect user password.");
+                return false;
+            }
+
+        }
+        return false;
     }
 
     public void catalogoCompra() {
+        CatalogoElectrodom electrodom = new CatalogoElectrodom();
+        CatalogoElectronica electronica = new CatalogoElectronica();
+        CatalogoFrutasYVer frutasYVer = new CatalogoFrutasYVer();
         System.out.println("================================== Catalogo ==========================================");
         System.out.println("Gracias por comprar con nosotros, espero encuentre todo lo que necesite :)");
         System.out.println("Thank you for choosing us, we hope that you find everything you need :)");
@@ -148,7 +281,7 @@ public class Compra {
     /**
      * Método auxiliar para la estructura del catalogo
      */
-    private void printCatalogo(Iterator<Productos> iterador) {
+    public void printCatalogo(Iterator<Productos> iterador) {
         while (iterador.hasNext()) {
             Productos catalogoItem = iterador.next();
             System.out.println("ID:" + catalogoItem.getCodigoBarras() + catalogoItem.getNombre());
@@ -156,6 +289,9 @@ public class Compra {
     }
 
     public Boolean mostrarCatalogo(String opcionUsuario, ZMAINCHEEMS main) {
+        CatalogoElectrodom electrodom = new CatalogoElectrodom();
+        CatalogoElectronica electronica = new CatalogoElectronica();
+        CatalogoFrutasYVer frutasYVer = new CatalogoFrutasYVer();
         System.out.println("================================= Catalogo ========================================");
         System.out.println("\nTenemos una gran variedad de productos aquí en CheemSmart.");
         System.out.println("We have a wide variety of products here at CheemSmart.\n");
@@ -246,16 +382,18 @@ public class Compra {
     }
 
     public void opciones(String opcionUsuario, ZMAINCHEEMS main) {
-        switch (opcionUsuario) {
-            case "CdeCiencia":
+        Cliente usuario = acceso.obtenerCliente((opcionUsuario));
+        String nacionalidad = usuario.getNacionalidad();
+        switch (nacionalidad) {
+            case "Español":
                 main.cambiaVista(new VistaEspanol());
                 System.out.println(main.opciones());
                 break;
-            case "JuanHorse938":
+            case "Mexicano":
                 main.cambiaVista(new VistaMexa());
                 System.out.println(main.opciones());
                 break;
-            case "Arthur":
+            case "Estadounidense":
                 main.cambiaVista(new VistaGringo());
                 System.out.println(main.opciones());
                 break;
@@ -268,12 +406,13 @@ public class Compra {
 
     public Boolean opcionesCatalogo(String opcionUsuario, ZMAINCHEEMS main) {
         Boolean bool = false;
-        switch (opcionUsuario) {
-            case "CdeCiencia":
+        Cliente usuario = acceso.obtenerCliente((opcionUsuario));
+        String nacionalidad = usuario.getNacionalidad();
+        switch (nacionalidad) {
+            case "Español":
                 System.out.println(main.opcionesCatalogo());
-                int opCatalogoEsp = 2;
                 try {
-                    opCatalogoEsp = scanner.nextInt();
+                    int opCatalogoEsp = scanner.nextInt();
                     if (opCatalogoEsp == 1) {
                         System.out.println("       ------- Regresando al menú principal-------");
                         return false;
@@ -288,7 +427,7 @@ public class Compra {
                     // opcionesCatalogo(opcionUsuario, main);
                 }
                 break;
-            case "JuanHorse938":
+            case "Mexicano":
                 System.out.println(main.opcionesCatalogo());
                 try {
                     int opCatalogMex = scanner.nextInt();
@@ -305,45 +444,27 @@ public class Compra {
                     bool = false;
                 }
                 break;
-            case "Arthur":
+            case "Estadounidense":
                 main.cambiaVista(new VistaGringo());
                 System.out.println(main.opcionesCatalogo());
-                try {
-                    int opCatalogUSA = scanner.nextInt();
-                    if (opCatalogUSA == 1) {
-                        System.out.println("       ------- Returning to the main menu -------");
-                        return false;
-                    } else {
-                        bool = true;
-                        System.out.println("       ######### Closing the program #########");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error: You must enter an integer.");
-                    System.out.println("        ----- Returning to the main menu -----");
-                    bool = false;
+                // try {
+                int opCatalogUSA = scanner.nextInt();
+                if (opCatalogUSA == 1) {
+                    System.out.println("       ------- Returning to the main menu -------");
+                    return false;
+                } else {
+                    bool = true;
+                    System.out.println("       ######### Closing the program #########");
                 }
+                // } catch (Exception e) {
+                // System.out.println("Error: You must enter an integer.");
+                // System.out.println(" ----- Returning to the main menu -----");
+                // bool = false;
+                // }
                 break;
             default:
                 System.out.println("No seleccionaste una opción válida ):");
         }
         return bool;
     }
-
-    public Cliente getCliente(String opcionUsuario) {
-        Cliente cliente = null;
-        if ("CdeCiencia".equals(opcionUsuario)) {
-            main.cambiaVista(new VistaEspanol());
-            cliente = acceso.regresaCliente(2);
-        } else if ("JuanHorse938".equals(opcionUsuario)) {
-            main.cambiaVista(new VistaMexa());
-            cliente = acceso.regresaCliente(1);
-        } else if ("Arthur".equals(opcionUsuario)) {
-            main.cambiaVista(new VistaGringo());
-            cliente = acceso.regresaCliente(3);
-        } else {
-            System.out.println("Cliente no encontrado");
-        }
-        return cliente;
-    }
-
 }

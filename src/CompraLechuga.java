@@ -28,8 +28,8 @@ public class CompraLechuga extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        if (OfertaAlimentos() = true) {
-            precio = producto.getPrecio() + 5.5 / 4;
+        if (VistaMexa.OfertaAlimentos() == true) {
+            precio = producto.getPrecio() + (5.5 / 4) * 3;
 
         } else {
             precio = producto.getPrecio() + 5.5;

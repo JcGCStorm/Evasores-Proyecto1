@@ -1,5 +1,6 @@
 public class CuentaBancariaProxy {
     private CuentaBancaria cuentaOriginal;
+    private String clave;
 
     public CuentaBancariaProxy(CuentaBancaria cuentaOriginal) {
         this.cuentaOriginal = cuentaOriginal;
@@ -30,5 +31,18 @@ public class CuentaBancariaProxy {
      */
     public void actualizarSaldo(double nuevoSaldo) {
         cuentaOriginal.setSaldo(nuevoSaldo);
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    /**
+     * Verifica si la clave proporcionada coincide con la clave de la cuenta
+     * 
+     * @return true si la clave coincide, false en caso contrario
+     */
+    public boolean verificarClave() {
+        return clave.equals(cuentaOriginal.getClave());
     }
 }

@@ -29,6 +29,10 @@ public class ZMAINCHEEMS {
         return ditto.opcionesCatalogo();
     }
 
+    public String completarCompra() {
+        return ditto.completarCompra();
+    }
+
     public static void main(String[] args) {
         ZMAINCHEEMS main = new ZMAINCHEEMS();
         // creacion de cliente
@@ -43,26 +47,31 @@ public class ZMAINCHEEMS {
         System.out.println("Por favor, introduzca su usuario:");
         System.out.println("Please enter your username:");
         String opcionUsuario = scanner.nextLine();
+
         // Buscar el nombre en los clientes
         boolean usuarioBool = false;
         while (usuarioBool == false) {
             if (acceso.contieneUsuario(opcionUsuario) == false) {
+                System.out.println("\nNombre de usuario incorrecto, intenta otra vez:");
+                System.out.println("Incorrect username, try again:");
                 opcionUsuario = scanner.nextLine();
                 acceso.contieneUsuario(opcionUsuario);
             } else {
                 usuarioBool = true;
-                switch (opcionUsuario) {
-                    case "CdeCiencia":
+                Cliente usuario = acceso.obtenerCliente((opcionUsuario));
+                String nacionalidad = usuario.getNacionalidad();
+                switch (nacionalidad) {
+                    case "Español":
                         main.cambiaVista(new VistaEspanol());
                         System.out.println("\nOstras Perlín, bienvenido " + opcionUsuario);
                         System.out.println("Introduce tu contraseña ostia:");
                         break;
-                    case "JuanHorse938":
+                    case "Mexicano":
                         main.cambiaVista(new VistaMexa());
                         System.out.println("\nKiubo mi buen " + opcionUsuario);
                         System.out.println("Escribe tú contraseña pero en fa:");
                         break;
-                    case "Arthur":
+                    case "Estadounidense":
                         main.cambiaVista(new VistaGringo());
                         System.out.println("\nWelcome dear " + opcionUsuario);
                         System.out.println("Enter your password please:");
@@ -90,35 +99,37 @@ public class ZMAINCHEEMS {
             System.out.println(main.opciones());
             try {
                 int opcion2 = scanner.nextInt();
+                Compra catalogo = new Compra(opcionUsuario, main);
+                CatalogoProxy catalogoProxy = new CatalogoProxy(catalogo);
                 if (opcion2 == 1) {
-                    Compra catalogo = new Compra();
-                    catalogoBool = catalogo.mostrarCatalogo(opcionUsuario, main);
+                    catalogoBool = catalogoProxy.mostrarCatalogo(opcionUsuario, main);
                 } else if (opcion2 == 2) {
-                    Compra preparab = new Compra();
-                    catalogoBool = preparab.compraProducto(opcionUsuario);
+                    catalogoBool = catalogo.compraProducto(opcionUsuario);
                 } else if (opcion2 == 3) {
                     catalogoBool = true;
                 } else {
                     System.out.println("No seleccionaste una opción válida ):");
                 }
             } catch (Exception e) {
-                switch (opcionUsuario) {
-                    case "CdeCiencia":
+                Cliente usuario = acceso.obtenerCliente((opcionUsuario));
+                String nacionalidad = usuario.getNacionalidad();
+                switch (nacionalidad) {
+                    case "Español":
                         System.out.println("¿Pero que leches?, debes ingresar un valor numerico chaval.");
                         break;
-                    case "JuanHorse938":
+                    case "Mexicano":
                         System.out.println("¿Que pasó master? ¡¡¡Debes ingresar un número!!!");
                         break;
-                    case "Arthur":
+                    case "Estadounidense":
                         main.cambiaVista(new VistaGringo());
                         System.out.println("Error, you must enter an integer.");
                         break;
                     default:
                         System.out.println("No seleccionaste una opción válida ):");
                 }
-                catalogoBool = true;
             }
         }
+        catalogoBool = true;
         System.out.println(main.despedir());
     }
 }

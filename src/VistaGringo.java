@@ -34,8 +34,7 @@ public class VistaGringo implements VistaCliente {
 
     @Override
     public String completarCompra() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'completarCompra'");
+        return "You want to proceed with payment? (yes/no)";
     }
 
     @Override

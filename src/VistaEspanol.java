@@ -35,7 +35,7 @@ public class VistaEspanol implements VistaCliente {
 
     @Override
     public String completarCompra() {
-        return "Ostias chaval a continuar con la compra.";
+        return "¿Deseas continuar con el pago?. (si/no)";
     }
 
     @Override

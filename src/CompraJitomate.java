@@ -28,8 +28,13 @@ public class CompraJitomate extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 39.9;
+        if (VistaMexa.OfertaAlimentos() == true) {
+            precio = producto.getPrecio() + (39.90 / 4) * 3;
 
+        } else {
+            precio = producto.getPrecio() + 39.90;
+        }
+        return precio;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class CompraJitomate extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "1 kg de Jitomate.                                            ($39.9)";
+        return "1 kg de Jitomate.                                            ($39.90)";
     }
 
 }

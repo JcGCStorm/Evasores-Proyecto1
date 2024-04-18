@@ -28,7 +28,13 @@ public class CompraZwitch extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 7790.0;
+        if (VistaGringo.OfertaElectronicos() == true) {
+            precio = producto.getPrecio() + (7790.00 / 5) * 4;
+
+        } else {
+            precio = producto.getPrecio() + 7790.00;
+        }
+        return precio;
 
     }
 
