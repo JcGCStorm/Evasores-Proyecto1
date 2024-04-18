@@ -1,23 +1,24 @@
 public class ClienteEstadounidense implements Cliente {
 
-   String usuario;              //"Arthur";
-   String contrasena;           // "333221";
-   String nombreReal;           // "Arthur Morgan";
-   String telefono;             // "78966652";
-   String direccion;            // "56 St. , Austin, Texas, U.S.A";
-   String nacionalidad;         // "Estadounidense";
-   int id;                      // 1899 
-
+    String usuario; // "Arthur";
+    String contrasena; // "333221";
+    String nombreReal; // "Arthur Morgan";
+    String telefono; // "78966652";
+    String direccion; // "56 St. , Austin, Texas, U.S.A";
+    String nacionalidad; // "Estadounidense";
+    int id; // 1899
+    CuentaBancaria cuentaBancaria;
 
     public ClienteEstadounidense(String usuario, String contrasena, String nombreReal, String telefono,
-                          String direccion, String nacionalidad, int id){
-        this.usuario      = usuario;
-        this.contrasena   = contrasena;
-        this.nombreReal   = nombreReal;
-        this.telefono     = telefono;
-        this.direccion    = direccion;
+            String direccion, String nacionalidad, int id, CuentaBancaria cuentaBancaria) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombreReal = nombreReal;
+        this.telefono = telefono;
+        this.direccion = direccion;
         this.nacionalidad = nacionalidad;
-        this.id           = id;
+        this.id = id;
+        this.cuentaBancaria = cuentaBancaria;
     }
 
     @Override
@@ -51,7 +52,12 @@ public class ClienteEstadounidense implements Cliente {
     }
 
     @Override
-    public int getID(){
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    @Override
+    public int getID() {
         return id;
     }
 

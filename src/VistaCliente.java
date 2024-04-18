@@ -7,9 +7,9 @@ public interface VistaCliente {
 
     public String opcionesCatalogo();
 
-    // public String completarCompra();
+    public String completarCompra();
 
     // public String darFechaEntrega();
 
-    // public String enviarOfertas();
+    public boolean mostrarOferta();
 }

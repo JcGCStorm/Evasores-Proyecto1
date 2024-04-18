@@ -1,24 +1,26 @@
 public class ClienteMexicano implements Cliente {
 
-    String usuario;              //"JuanHorse938";
-   String contrasena;           // "1234";
-   String nombreReal;           // "Juan Lopez";
-   String telefono;             // "5533456798";
-   String direccion;            // "Ciudad de Mexico, Venustiano Carranza Número 24, Lote 3, mzn 23";
-   String nacionalidad;         // "Mexicano";
-   int id;                      // 8423
-
+    String usuario; // "JuanHorse938";
+    String contrasena; // "1234";
+    String nombreReal; // "Juan Lopez";
+    String telefono; // "5533456798";
+    String direccion; // "Ciudad de Mexico, Venustiano Carranza Número 24, Lote 3, mzn 23";
+    String nacionalidad; // "Mexicano";
+    int id; // 8423
+    CuentaBancaria cuentaBancaria;
 
     public ClienteMexicano(String usuario, String contrasena, String nombreReal, String telefono,
-                          String direccion, String nacionalidad, int id){
-        this.usuario      = usuario;
-        this.contrasena   = contrasena;
-        this.nombreReal   = nombreReal;
-        this.telefono     = telefono;
-        this.direccion    = direccion;
+            String direccion, String nacionalidad, int id, CuentaBancaria cuentaBancaria) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombreReal = nombreReal;
+        this.telefono = telefono;
+        this.direccion = direccion;
         this.nacionalidad = nacionalidad;
-        this.id           = id;
+        this.id = id;
+        this.cuentaBancaria = cuentaBancaria;
     }
+
     @Override
     public String getUsuario() {
         return usuario;
@@ -50,7 +52,13 @@ public class ClienteMexicano implements Cliente {
     }
 
     @Override
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    @Override
     public int getID() {
         return id;
     }
+
 }

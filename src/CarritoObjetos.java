@@ -7,7 +7,7 @@ public abstract class CarritoObjetos implements Productos {
     protected Productos producto;
 
     /**
-     * Constructor de la clase ObjetosCarrito
+     * Constructor de la clase CarritoObjetos
      * 
      * @param producto La Productos a decorar con ingredientes
      */

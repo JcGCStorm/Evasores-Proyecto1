@@ -34,14 +34,12 @@ public class CompraLaptop extends CarritoObjetos {
 
     @Override
     public String getCodigoBarras() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+        return "2982. ";
     }
 
     @Override
     public String getNombre() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+        return "Laptop HP, con procesador Ryzen 3, 8GB de RAM.               ($10,299.00)";
     }
 
 }

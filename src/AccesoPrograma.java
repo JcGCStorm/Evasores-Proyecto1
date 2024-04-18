@@ -5,15 +5,16 @@ public class AccesoPrograma {
     // Crear la lista de clientes
     Cliente mexicano = new ClienteMexicano("JuanHorse938", "1234", "Juan Lopez", "5533456798",
             "Ciudad de Mexico, Venustiano Carranza Número 24, Lote 3, mzn 23",
-            "Mexicano", 8423);
-    Cliente espanol = new ClienteEspanol("CdeCiencia", "vivaEspaña", "Samuel de Luque", "+34-83494854",
+            "Mexicano", 8423, new CuentaBancaria(1900.6));
+    Cliente espanol = new ClienteEspanol("CdeCiencia", "vivaEspana", "Samuel de Luque", "+34-83494854",
             "Avenida YT, calzada mojang número 22, Andorra",
-            "Español", 0777);
+            "Español", 0777, new CuentaBancaria(9000));
     Cliente estadounidense = new ClienteEstadounidense("Arthur", "333221", "Arthur Morgan", "78966652",
             "56 St. , Austin, Texas, U.S.A",
-            "Estadounidense", 1899);
-    ArrayList<String> clientes = new ArrayList<>();
+            "Estadounidense", 1899, new CuentaBancaria(100000));
+    ArrayList<Cliente> clientes = new ArrayList<>();
     ArrayList<String> contrasenas = new ArrayList<>();
+
     Scanner scanner = new Scanner(System.in);
 
     public AccesoPrograma() {
@@ -21,23 +22,30 @@ public class AccesoPrograma {
     }
 
     public void agregaClientes() {
-        clientes.add(mexicano.getUsuario());
-        clientes.add(espanol.getUsuario());
-        clientes.add(estadounidense.getUsuario());
+        clientes.add(mexicano);
+        clientes.add(espanol);
+        clientes.add(estadounidense);
         contrasenas.add(mexicano.getContrasena());
         contrasenas.add(espanol.getContrasena());
         contrasenas.add(estadounidense.getContrasena());
     }
 
     public Boolean contieneUsuario(String opcionUsuario) {
-        if (clientes.contains(opcionUsuario)) {
-            Boolean encontrado = true;
-            return encontrado;
-        } else {
-            System.out.println("Nombre de Usuario incorrecto, intentalo de nuevo");
-            Boolean encontrado = false;
-            return encontrado;
+        for (Cliente cliente : clientes) {
+            if (cliente.getUsuario().equals(opcionUsuario)) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    public Cliente obtenerCliente(String opcionUsuario) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getUsuario().equals(opcionUsuario)) {
+                return cliente;
+            }
+        }
+        return null;
     }
 
     public Cliente regresaCliente(int i) {

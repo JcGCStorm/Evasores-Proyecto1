@@ -28,20 +28,23 @@ public class CompraLechuga extends CarritoObjetos {
      * @return El precio de la Productos con lechuga
      */
     public double getPrecio() {
-        return producto.getPrecio() + 5.5;
+        if (OfertaAlimentos() = true) {
+            precio = producto.getPrecio() + 5.5 / 4;
 
+        } else {
+            precio = producto.getPrecio() + 5.5;
+        }
+        return precio;
     }
 
     @Override
     public String getCodigoBarras() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+        return "1938. ";
     }
 
     @Override
     public String getNombre() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+        return "Lechuga.                                                     ($5.50)";
     }
 
 }

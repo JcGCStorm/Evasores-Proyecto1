@@ -34,14 +34,12 @@ public class CompraJitomate extends CarritoObjetos {
 
     @Override
     public String getCodigoBarras() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+        return "1672. ";
     }
 
     @Override
     public String getNombre() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+        return "1 kg de Jitomate.                                            ($39.9)";
     }
 
 }

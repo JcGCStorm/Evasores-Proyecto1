@@ -34,14 +34,12 @@ public class CompraZwitch extends CarritoObjetos {
 
     @Override
     public String getCodigoBarras() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+        return "2021. ";
     }
 
     @Override
     public String getNombre() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+        return "Nientiendo Zwitch.                                           ($7,790.00)";
     }
 
 }

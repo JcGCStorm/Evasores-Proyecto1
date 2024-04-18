@@ -39,7 +39,7 @@ public class CompraTV extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "Television";
+        return "Television.                                                  ($5,199.00)";
     }
 
 }

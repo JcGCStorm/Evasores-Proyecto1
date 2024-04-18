@@ -34,14 +34,12 @@ public class CompraManzana extends CarritoObjetos {
 
     @Override
     public String getCodigoBarras() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+        return "1849. ";
     }
 
     @Override
     public String getNombre() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+        return "1 kg de Manzana.                                             ($36.9)";
     }
 
 }

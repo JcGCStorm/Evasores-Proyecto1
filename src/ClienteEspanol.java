@@ -1,23 +1,24 @@
 public class ClienteEspanol implements Cliente {
-// Para este ejemplo esos son los valores que pusimos.
-   String usuario;              //"CdeCiencia";
-   String contrasena;           // "vivaEspaña";
-   String nombreReal;           // "Samuel de Luque";
-   String telefono;             // "+34-83494854";
-   String direccion;            // "Avenida YT, calzada mojang número 22, Andorra";
-   String nacionalidad;         // "Español";
-   int id;                       // 777
-
+    // Para este ejemplo esos son los valores que pusimos.
+    String usuario; // "CdeCiencia";
+    String contrasena; // "vivaEspaña";
+    String nombreReal; // "Samuel de Luque";
+    String telefono; // "+34-83494854";
+    String direccion; // "Avenida YT, calzada mojang número 22, Andorra";
+    String nacionalidad; // "Español";
+    int id; // 777
+    CuentaBancaria cuentaBancaria;
 
     public ClienteEspanol(String usuario, String contrasena, String nombreReal, String telefono,
-                          String direccion, String nacionalidad, int id){
-        this.usuario      = usuario;
-        this.contrasena   = contrasena;
-        this.nombreReal   = nombreReal;
-        this.telefono     = telefono;
-        this.direccion    = direccion;
+            String direccion, String nacionalidad, int id, CuentaBancaria cuentaBancaria) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombreReal = nombreReal;
+        this.telefono = telefono;
+        this.direccion = direccion;
         this.nacionalidad = nacionalidad;
-        this.id           = id;
+        this.id = id;
+        this.cuentaBancaria = cuentaBancaria;
     }
 
     @Override
@@ -51,8 +52,13 @@ public class ClienteEspanol implements Cliente {
     }
 
     @Override
-    public int getID(){
+    public int getID() {
         return id;
+    }
+
+    @Override
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
 }

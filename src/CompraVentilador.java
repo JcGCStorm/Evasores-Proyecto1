@@ -33,12 +33,12 @@ public class CompraVentilador extends CarritoObjetos {
 
     @Override
     public String getCodigoBarras() {
-        return "1982. ";
+        return "3257. ";
     }
 
     @Override
     public String getNombre() {
-        return "Ventilador de Piso Taurus 20 Pulgadas ($889.0)";
+        return "Ventilador de Piso Taurus 20 Pulgadas.                       ($889.0)";
     }
 
 }

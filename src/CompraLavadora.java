@@ -34,12 +34,12 @@ public class CompraLavadora extends CarritoObjetos {
 
     @Override
     public String getCodigoBarras() {
-        return "1021. ";
+        return "3956. ";
     }
 
     @Override
     public String getNombre() {
-        return "Lavadora Midea Doble Tina 11 Kg Blanca ($3690.0)";
+        return "Lavadora Midea Doble Tina 11 Kg Blanca.                      ($3690.0)";
     }
 
 

@@ -88,19 +88,37 @@ public class ZMAINCHEEMS {
         while (catalogoBool == false) {
             System.out.println(main.saludar());
             System.out.println(main.opciones());
-            int opcion2 = scanner.nextInt();
-            if (opcion2 == 1) {
-                Compra catalogo = new Compra();
-                catalogoBool = catalogo.mostrarCatalogo(opcionUsuario, main);
-            } else if (opcion2 == 2) {
-                Compra preparab = new Compra();
-                catalogoBool = preparab.compraProducto(opcionUsuario);
-            } else if (opcion2 == 3) {
+            try {
+                int opcion2 = scanner.nextInt();
+                if (opcion2 == 1) {
+                    Compra catalogo = new Compra();
+                    catalogoBool = catalogo.mostrarCatalogo(opcionUsuario, main);
+                } else if (opcion2 == 2) {
+                    Compra preparab = new Compra();
+                    catalogoBool = preparab.compraProducto(opcionUsuario);
+                } else if (opcion2 == 3) {
+                    catalogoBool = true;
+                } else {
+                    System.out.println("No seleccionaste una opción válida ):");
+                }
+            } catch (Exception e) {
+                switch (opcionUsuario) {
+                    case "CdeCiencia":
+                        System.out.println("¿Pero que leches?, debes ingresar un valor numerico chaval.");
+                        break;
+                    case "JuanHorse938":
+                        System.out.println("¿Que pasó master? ¡¡¡Debes ingresar un número!!!");
+                        break;
+                    case "Arthur":
+                        main.cambiaVista(new VistaGringo());
+                        System.out.println("Error, you must enter an integer.");
+                        break;
+                    default:
+                        System.out.println("No seleccionaste una opción válida ):");
+                }
                 catalogoBool = true;
-            } else {
-                System.out.println("No seleccionaste una opción válida ):");
             }
         }
-        main.despedir();
+        System.out.println(main.despedir());
     }
 }

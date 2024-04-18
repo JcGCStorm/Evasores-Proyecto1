@@ -39,7 +39,7 @@ public class CompraCombo extends CarritoObjetos {
 
     @Override
     public String getNombre() {
-        return "Combo Oster 4 Elementos, Licuadora, Cafetera, Batidora y Plancha Rojo ($2,369.9.0)";
+        return "Combo 4 Elementos, Licuadora, Cafetera, Batidora y Plancha.  ($2,369.9.0)";
     }
 
 }
