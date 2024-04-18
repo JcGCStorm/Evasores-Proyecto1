@@ -50,4 +50,9 @@ public class Carrito implements Productos {
     public String getNombre() {
         return "Carrito";
     }
+
+    @Override
+    public String getDepartamento() {
+        return "Carrito";
+    }
 }
