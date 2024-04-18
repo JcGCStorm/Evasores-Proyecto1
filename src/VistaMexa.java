@@ -1,5 +1,8 @@
 import java.util.Random;
 
+/**
+ * Clase VistaMexa que implementa VistaCliente
+ */
 public class VistaMexa implements VistaCliente {
     private String espacio = "==================================================================================";
     private String decision = "¿Qué quieres hacer apá? \n 1. Nada más ando viendo gracias. (Ver catalogo)." +
@@ -19,7 +22,7 @@ public class VistaMexa implements VistaCliente {
 
     @Override
     public String mostrarDespedida() {
-        return "Ahí nos vidrios \n" + espacio;
+        return "Orale pues, ahí nos vidrios. \n" + espacio;
     }
 
     public String opciones() {
@@ -51,4 +54,11 @@ public class VistaMexa implements VistaCliente {
 
         return imprimirMensaje;
     }
+
+    @Override
+    public String darFechaEntrega() {
+        Random random = new Random();
+        int dias = random.nextInt(15);           
+        return "Puessss tus productos llegarán en aproximadamente " + dias + " dias si Dios quiere.";
+      }
 }

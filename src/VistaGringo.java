@@ -19,7 +19,7 @@ public class VistaGringo implements VistaCliente {
 
     @Override
     public String mostrarDespedida() {
-        return "Goodbye\n" + espacio;
+        return "Goodbye.\n" + espacio;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class VistaGringo implements VistaCliente {
 
     @Override
     public String completarCompra() {
-        return "You want to proceed with payment? (yes/no)";
+        return "You want to proceed with the payment? (yes/no)";
     }
 
     @Override
@@ -52,4 +52,11 @@ public class VistaGringo implements VistaCliente {
 
         return imprimirMensaje;
     }
+
+    @Override
+    public String darFechaEntrega() {
+        Random random = new Random();
+        int dias = random.nextInt(15);           
+        return "Your products will arrive in approximately " + dias + " days.";
+      }
 }

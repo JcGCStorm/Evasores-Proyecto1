@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 /**
- * Clase WaySub, es nuestro main, la interacción entre el usuario y
- * el programa, debe dejar escoger entre pizza o Baguette, de ser
- * Baguette te muestra los ingredientes y cuántos deseas ponerle,
- * en caso contrario te muestra las pizzas y te da a escoger una.
+ * Clase ZMAINCHEEMS, es nuestro main, la interacción entre el usuario y
+ * el programa, debe dejar escoger si ver catalogo, comprar o salir, de no escoger ninguna
+ * cierra el programa. En caso de escoger el catalogo solo te muestra eso y luego te dice si
+ * quieres volver al menu principal. En caso de escoger comprar te muestra el catalogo y te
+ * deja comprar.
  */
 public class ZMAINCHEEMS {
     private VistaCliente ditto;
@@ -31,6 +32,10 @@ public class ZMAINCHEEMS {
 
     public String completarCompra() {
         return ditto.completarCompra();
+    }
+
+    public String darFechaEntrega() {
+        return ditto.darFechaEntrega();
     }
 
     public static void main(String[] args) {
@@ -116,14 +121,24 @@ public class ZMAINCHEEMS {
                 switch (nacionalidad) {
                     case "Español":
                         System.out.println("¿Pero que leches?, debes ingresar un valor numerico chaval.");
+                        System.out.println("         ###### Cerrando el Programa ######");
+                      catalogoBool = true;
                         break;
                     case "Mexicano":
                         System.out.println("¿Que pasó master? ¡¡¡Debes ingresar un número!!!");
+                        System.out.println("         ###### Cerrando el Programa ######");
+                        catalogoBool = true;
                         break;
                     case "Estadounidense":
                         main.cambiaVista(new VistaGringo());
                         System.out.println("Error, you must enter an integer.");
+                        System.out.println("         ###### Cerrando el Programa ######");
+                        catalogoBool = true;
                         break;
+                    case "cancelado":
+                        catalogoBool = true;
+                    
+                    break;
                     default:
                         System.out.println("No seleccionaste una opción válida ):");
                 }

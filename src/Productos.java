@@ -1,23 +1,33 @@
 /**
- * Interfaz que representa una baguette
+ * Interfaz que representa un Producto
  */
 public interface Productos {
 
+    /**
+     * Obtiene el nombre del producto
+     * 
+     * @return El nombre del producto
+     */
     public String getNombre();
 
     /**
-     * Obtiene la descripción de la baguette
+     * Obtiene la descripción del Producto
      * 
-     * @return La descripción de la baguette
+     * @return La descripción del producto
      */
     public String getDescripcion();
 
     /**
-     * Obtiene el precio de la baguette
+     * Obtiene el precio del producto
      * 
-     * @return El precio de la baguette
+     * @return El precio del producto
      */
     public double getPrecio();
-
+    
+    /**
+     * Obtiene el codigo de barras del producto
+     * 
+     * @return El codigo de barras del producto
+     */
     public String getCodigoBarras();
 }

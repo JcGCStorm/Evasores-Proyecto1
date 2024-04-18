@@ -9,7 +9,7 @@ public interface VistaCliente {
 
     public String completarCompra();
 
-    // public String darFechaEntrega();
+    public String darFechaEntrega();
 
     public boolean mostrarOferta();
 }

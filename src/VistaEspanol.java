@@ -20,7 +20,7 @@ public class VistaEspanol implements VistaCliente {
 
     @Override
     public String mostrarDespedida() {
-        return "Ostias tío \n" + espacio;
+        return "Adios, chaval \n" + espacio;
     }
 
     @Override
@@ -54,4 +54,12 @@ public class VistaEspanol implements VistaCliente {
         return imprimirMensaje;
     }
 
-}
+    @Override
+    public String darFechaEntrega() {
+        Random random = new Random();
+        int dias = random.nextInt(15);           
+        return "Tus productos van a todo gas, llegarán aproximadamente en " + dias + " dias chaval.";
+      }
+  }
+
+

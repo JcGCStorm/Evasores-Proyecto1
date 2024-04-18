@@ -1,6 +1,6 @@
 /**
  * Clase abstracta que sirve como base para decoradores de ingredientes de
- * Productoss
+ * Productos
  * Implementa la interfaz Productos
  */
 public abstract class CarritoObjetos implements Productos {
@@ -10,7 +10,7 @@ public abstract class CarritoObjetos implements Productos {
     /**
      * Constructor de la clase CarritoObjetos
      * 
-     * @param producto La Productos a decorar con ingredientes
+     * @param producto Los productos a decorar.
      */
     public CarritoObjetos(Productos producto) {
         this.producto = producto;
@@ -18,18 +18,18 @@ public abstract class CarritoObjetos implements Productos {
     }
 
     /**
-     * Obtiene la descripción de la Productos decorada con ingredientes
+     * Obtiene la descripción del Carrito decorada con productos.
      * 
-     * @return La descripción de la Productos decorada con ingredientes
+     * @return La descripción del Carrito decorada con productos.
      */
     public String getDescripcion() {
         return producto.getDescripcion();
     }
 
     /**
-     * Obtiene el precio de la Productos decorada con ingredientes
+     * Obtiene el precio del Carritp decorado con productos.
      * 
-     * @return El precio de la Productos decorada con ingredientes
+     * @return El precio del carrito decorado con productos.
      */
     public double getPrecio() {
         return precio;

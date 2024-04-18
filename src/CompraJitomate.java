@@ -1,31 +1,30 @@
 /**
- * Clase que representa el ingrediente Lechuga para "decorar" (agregarle a) una
- * Productos
+ * Clase que representa el producto "Jitomate" para "decorar" (agregarle a) el carrito.
  * Extiende de ObjetosCarrito
  */
 public class CompraJitomate extends CarritoObjetos {
     /**
-     * Constructor de la clase Lechuga
+     * Constructor de la clase CompraJitomate
      * 
-     * @param producto La Productos a decorar con lechuga
+     * @param producto El carrito a decorar con jitomate
      */
     public CompraJitomate(Productos producto) {
         super(producto);
     }
 
     /**
-     * Obtiene la descripción de la Productos con Lechuga
+     * Obtiene la descripción del carrito con el jitomate
      * 
-     * @return La descripción de la Productos con lechuga
+     * @return La descripción del carrito con jitomate
      */
     public String getDescripcion() {
         return producto.getDescripcion() + "Jitomate,";
     }
 
-    /**
-     * Obtiene el precio de la Productos con Lechuga
+     /**
+     * Obtiene el precio del carrito con el jitomate
      * 
-     * @return El precio de la Productos con lechuga
+     * @return El precio del carrito con el jitomate
      */
     public double getPrecio() {
         if (VistaMexa.OfertaAlimentos() == true) {
@@ -37,11 +36,21 @@ public class CompraJitomate extends CarritoObjetos {
         return precio;
     }
 
+    /**
+     * Obtiene el codigo de barras del jitomate
+     * 
+     * @return El codigo de barras del jitomate
+     */
     @Override
     public String getCodigoBarras() {
         return "1672. ";
     }
 
+    /**
+     * Obtiene el nombre a mostrar en el catalogo del jitomate
+     * 
+     * @return El nombre del jitomate
+     */
     @Override
     public String getNombre() {
         return "1 kg de Jitomate.                                            ($39.90)";

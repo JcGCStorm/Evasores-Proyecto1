@@ -75,6 +75,7 @@ public class Compra implements Serializable, CatalogoRemoto {
                     }
                 } catch (Exception e) {
                     System.out.println("Debes ingresar el número del codigo de barras, no debes ingresar letras.");
+                    System.out.println("You must enter the number of the barcode, you must not enter letters");
                     opcionUsuario = "cancelado";
                     ponmeMas = false;
                 }
@@ -124,6 +125,8 @@ public class Compra implements Serializable, CatalogoRemoto {
                         System.out.println("¿Para que pides entonces? Eso no se hace tio :(.");
                         return false;
                     }
+                case "cancelado":
+                     return false;
                 default:
                     break;
             }
@@ -134,8 +137,6 @@ public class Compra implements Serializable, CatalogoRemoto {
 
     public Boolean pagar(Productos comida, String opcionUsuario) {
         AccesoPrograma accesoPrograma = new AccesoPrograma();
-        System.out.println("Bienvenido a la pantalla de CompraSegura / Welcome to the SafeShop screen");
-
         Cliente cliente = accesoPrograma.obtenerCliente((opcionUsuario));
         if (cliente == null) {
             System.out.println("Usuario no encontrado / User not found");
@@ -145,7 +146,8 @@ public class Compra implements Serializable, CatalogoRemoto {
         if (cliente.getNacionalidad().equals("Mexicano")) {
 
             double total = comida.getPrecio();
-            System.out.println("Orale, tu total a pagar es de: $" + total);
+            System.out.println("\n   ---Bienvenido a la pantalla de CompraSegura, danos todo tú dinero.---");
+            System.out.println("Orale, tu total a pagar es de: $" + total + "\n");
             System.out.println("Ingresa nuevamente la contraseña de tu usuario de la tienda: ");
             String contrasena = scanner.next();
 
@@ -154,14 +156,18 @@ public class Compra implements Serializable, CatalogoRemoto {
                 cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
 
                 if (cuentaProxy.getSaldo() >= total) {
-                    System.out.println("Ingrese la clave de tu cuenta porfa: ");
+                    System.out.println("\nIngrese la clave de tu cuenta porfa: ");
                     String clave = scanner.next();
                     cuentaProxy.setClave(clave);
 
                     if (cuentaProxy.verificarClave()) {
                         cuentaProxy.realizarPago(total);
-                        System.out.println("Pago realizado exitosamente, requetebien.");
+                        System.out.println("\nPago realizado exitosamente, requetebien.");
                         cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
+                        System.out.println("Te quedan un total de $:" + cuentaProxy.getSaldo() + " pejecoins");
+                        ZMAINCHEEMS main = new ZMAINCHEEMS();
+                        main.cambiaVista(new VistaMexa());
+                        System.out.println(main.darFechaEntrega());
                         return imprimirTicket(comida, opcionUsuario);
                     } else {
                         System.out.println("Chale, parece que te equivocaste");
@@ -181,9 +187,9 @@ public class Compra implements Serializable, CatalogoRemoto {
         }
 
         if (cliente.getNacionalidad().equals("Español")) {
-
+            System.out.println("\n   ---Bienvenido a la pantalla de CompraSegura hermano Español.---");
             double total = comida.getPrecio();
-            System.out.println("Ostras, tu total a pagar es de: $" + total);
+            System.out.println("Ostras, tu total a pagar es de: $" + total + "\n");
             System.out.println("Ingresa nuevamente la contraseña de tu usuario de la tienda: ");
             String contrasena = scanner.next();
 
@@ -192,14 +198,15 @@ public class Compra implements Serializable, CatalogoRemoto {
                 cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
 
                 if (cuentaProxy.getSaldo() >= total) {
-                    System.out.println("Ingrese la clave de tu cuenta: ");
+                    System.out.println("\n Ingrese la clave de tu cuenta: ");
                     String clave = scanner.next();
                     cuentaProxy.setClave(clave);
 
                     if (cuentaProxy.verificarClave()) {
                         cuentaProxy.realizarPago(total);
-                        System.out.println("Pago realizado exitosamente, que guay.");
+                        System.out.println("\n Pago realizado exitosamente, que guay.");
                         cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
+                        System.out.println("Su saldo actual es de: $" + cuentaProxy.getSaldo());
                         return imprimirTicket(comida, opcionUsuario);
                     } else {
                         System.out.println("Que lío, parece que te equivocaste");
@@ -219,9 +226,9 @@ public class Compra implements Serializable, CatalogoRemoto {
         }
 
         if (cliente.getNacionalidad().equals("Estadounidense")) {
-
+            System.out.println("\n   ---Welcome to the SafeShop screen---");
             double total = comida.getPrecio();
-            System.out.println("Your total to pay is: $" + total);
+            System.out.println("Your total to pay is: $" + total + "\n");
             System.out.println("Enter your store user password again:");
             String contrasena = scanner.next();
 
@@ -230,14 +237,15 @@ public class Compra implements Serializable, CatalogoRemoto {
                 cuentaProxy = new CuentaBancariaProxy(cliente.getCuentaBancaria());
 
                 if (cuentaProxy.getSaldo() >= total) {
-                    System.out.println("Enter your account password: ");
+                    System.out.println("\nEnter your account password: ");
                     String clave = scanner.next();
                     cuentaProxy.setClave(clave);
 
                     if (cuentaProxy.verificarClave()) {
                         cuentaProxy.realizarPago(total);
-                        System.out.println("Payment made successfully");
+                        System.out.println("\nPayment made successfully");
                         cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
+                        System.out.println("Your current balance is: $" + cuentaProxy.getSaldo());
                         return imprimirTicket(comida, opcionUsuario);
                     } else {
                         System.out.println("What a mess, it seems you were wrong");
@@ -348,23 +356,25 @@ public class Compra implements Serializable, CatalogoRemoto {
      * @param comida la comida del usuario.
      */
     public Boolean imprimirTicket(Productos comida, String opcionUsuario) {
+        Cliente usuario = acceso.obtenerCliente((opcionUsuario));
+        String nacionalidad = usuario.getNacionalidad();
         Boolean imprimir = false;
-        switch (opcionUsuario) {
-            case "CdeCiencia":
+        switch (nacionalidad) {
+            case "Español":
                 main.cambiaVista(new VistaEspanol());
                 System.out.println("\n--------- Sus insumos son: -----------");
                 System.out.println(comida.getDescripcion());
                 System.out.println("Con un total de: $" + comida.getPrecio());
                 imprimir = true;
                 break;
-            case "JuanHorse938":
+            case "Mexicano":
                 main.cambiaVista(new VistaMexa());
                 System.out.println("\n--------- Su despensa es: -----------");
                 System.out.println(comida.getDescripcion());
                 System.out.println("Total: $" + comida.getPrecio());
                 imprimir = true;
                 break;
-            case "Arthur":
+            case "Estadounidense":
                 main.cambiaVista(new VistaGringo());
                 System.out.println("\n--------- Your products are: -----------");
                 System.out.println(comida.getDescripcion());
@@ -372,7 +382,7 @@ public class Compra implements Serializable, CatalogoRemoto {
                 imprimir = true;
                 break;
             case "cancelado":
-                System.out.println("###### Se ha cancelado tu compra./Your order has been canceled.######");
+                System.out.println("###### Se ha cancelado tu compra./Your purchase has been canceled.######");
                 imprimir = false;
                 break;
             default:

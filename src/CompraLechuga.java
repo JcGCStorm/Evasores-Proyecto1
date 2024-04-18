@@ -5,7 +5,7 @@
  */
 public class CompraLechuga extends CarritoObjetos {
     /**
-     * Constructor de la clase Lechuga
+     * Constructor de la clase CompraLechuga
      * 
      * @param producto La Productos a decorar con lechuga
      */
@@ -37,14 +37,24 @@ public class CompraLechuga extends CarritoObjetos {
         return precio;
     }
 
+    /**
+     * Obtiene el codigo de barras de la Lechuga
+     * 
+     * @return El codigo de barras de la Lechuga
+     */
     @Override
     public String getCodigoBarras() {
         return "1938. ";
     }
 
+    /**
+     * Obtiene el nombre a mostrar en el catalogo de la Lechuga
+     * 
+     * @return El nombre de la Lechuga
+     */
     @Override
     public String getNombre() {
-        return "Lechuga.                                                     ($5.50)";
+        return "Una Lechuga.                                                 ($5.50)";
     }
 
 }
