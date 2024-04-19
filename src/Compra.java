@@ -2,16 +2,34 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.io.Serializable;
 
+/**
+ * La clase Compra lleva toda la logistica de la compra, agregar objetos al carrito,
+ * pagar, mostrar el catalogo normal, y mostrar el catalogo de Compra.
+ */
 public class Compra implements Serializable, CatalogoRemoto {
+    /**
+     * Creamos las instancias necesarias para el funcionamiento correcto
+     * del programa.
+     */
     Scanner scanner = new Scanner(System.in);
     ZMAINCHEEMS main = new ZMAINCHEEMS();
     AccesoPrograma acceso = new AccesoPrograma();
     CuentaBancariaProxy cuentaProxy;
 
+    /**
+     * Constructor de la clase Compra
+     */
     public Compra(String opcionUsuario, ZMAINCHEEMS main) {
 
     }
 
+   /**
+    * Realiza una compra de productos según la opción seleccionada por el usuario.
+    * Este es parte de nuestro decorator ya que imprime los objetos que compramos 
+    * junto al catalogo.
+    * @param opcionUsuario La opción seleccionada por el usuario.
+    * @return true si la compra se realizó con éxito, false si la compra fue cancelada o no se pudo completar.
+    */
     public Boolean compraProducto(String opcionUsuario) {
         Productos producto;
         producto = new Carrito();
@@ -135,7 +153,14 @@ public class Compra implements Serializable, CatalogoRemoto {
         return false;
     }
 
-    public Boolean pagar(Productos comida, String opcionUsuario) {
+    /**
+     * Realiza el proceso de pago de los productos que envuelven el carrito para un cliente.
+     *
+     * @param producto         El producto a pagar.
+     * @param opcionUsuario La opción de usuario asociada al cliente que realiza la compra.
+     * @return true si el pago se realiza con éxito, false si el pago no se puede completar.
+     */
+    public Boolean pagar(Productos producto, String opcionUsuario) {
         AccesoPrograma accesoPrograma = new AccesoPrograma();
         Cliente cliente = accesoPrograma.obtenerCliente((opcionUsuario));
         if (cliente == null) {
@@ -145,7 +170,7 @@ public class Compra implements Serializable, CatalogoRemoto {
 
         if (cliente.getNacionalidad().equals("Mexicano")) {
 
-            double total = comida.getPrecio();
+            double total = producto.getPrecio();
             System.out.println("\n   ---Bienvenido a la pantalla de CompraSegura, danos todo tú dinero.---");
             System.out.println("Orale, tu total a pagar es de: $" + total + "\n");
             System.out.println("Ingresa nuevamente la contraseña de tu usuario de la tienda: ");
@@ -168,7 +193,7 @@ public class Compra implements Serializable, CatalogoRemoto {
                         ZMAINCHEEMS main = new ZMAINCHEEMS();
                         main.cambiaVista(new VistaMexa());
                         System.out.println(main.darFechaEntrega());
-                        return imprimirTicket(comida, opcionUsuario);
+                        return imprimirTicket(producto, opcionUsuario);
                     } else {
                         System.out.println("Chale, parece que te equivocaste");
 
@@ -188,7 +213,7 @@ public class Compra implements Serializable, CatalogoRemoto {
 
         if (cliente.getNacionalidad().equals("Español")) {
             System.out.println("\n   ---Bienvenido a la pantalla de CompraSegura hermano Español.---");
-            double total = comida.getPrecio();
+            double total = producto.getPrecio();
             System.out.println("Ostras, tu total a pagar es de: $" + total + "\n");
             System.out.println("Ingresa nuevamente la contraseña de tu usuario de la tienda: ");
             String contrasena = scanner.next();
@@ -207,7 +232,10 @@ public class Compra implements Serializable, CatalogoRemoto {
                         System.out.println("\n Pago realizado exitosamente, que guay.");
                         cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
                         System.out.println("Su saldo actual es de: $" + cuentaProxy.getSaldo());
-                        return imprimirTicket(comida, opcionUsuario);
+                        ZMAINCHEEMS main = new ZMAINCHEEMS();
+                        main.cambiaVista(new VistaEspanol());
+                        System.out.println(main.darFechaEntrega());
+                        return imprimirTicket(producto, opcionUsuario);
                     } else {
                         System.out.println("Que lío, parece que te equivocaste");
 
@@ -227,7 +255,7 @@ public class Compra implements Serializable, CatalogoRemoto {
 
         if (cliente.getNacionalidad().equals("Estadounidense")) {
             System.out.println("\n   ---Welcome to the SafeShop screen---");
-            double total = comida.getPrecio();
+            double total = producto.getPrecio();
             System.out.println("Your total to pay is: $" + total + "\n");
             System.out.println("Enter your store user password again:");
             String contrasena = scanner.next();
@@ -246,7 +274,10 @@ public class Compra implements Serializable, CatalogoRemoto {
                         System.out.println("\nPayment made successfully");
                         cuentaProxy.actualizarSaldo(cuentaProxy.getSaldo());
                         System.out.println("Your current balance is: $" + cuentaProxy.getSaldo());
-                        return imprimirTicket(comida, opcionUsuario);
+                        ZMAINCHEEMS main = new ZMAINCHEEMS();
+                        main.cambiaVista(new VistaGringo());
+                        System.out.println(main.darFechaEntrega());
+                        return imprimirTicket(producto, opcionUsuario);
                     } else {
                         System.out.println("What a mess, it seems you were wrong");
 
@@ -266,6 +297,11 @@ public class Compra implements Serializable, CatalogoRemoto {
         return false;
     }
 
+    /**
+     * Imprime el catalogo de la compra, utiliza catalogos individuales para cada
+     * departamento, ya sea electronica, electrodomesticos o frutas y verduras, este
+     * es el metodo real que manda a llamar ek proxy.
+     */
     public void catalogoCompra() {
         CatalogoElectrodom electrodom = new CatalogoElectrodom();
         CatalogoElectronica electronica = new CatalogoElectronica();
@@ -287,7 +323,9 @@ public class Compra implements Serializable, CatalogoRemoto {
     }
 
     /**
-     * Método auxiliar para la estructura del catalogo
+     * Método auxiliar para la estructura del catalogo, imprime el catalogo
+     * con ayuda de un iterador que recorre cada producto. Además este metodo
+     * da formato al catalogo que vamos a imprimir en la terminal.
      */
     public void printCatalogo(Iterator<Productos> iterador) {
         while (iterador.hasNext()) {
@@ -296,6 +334,10 @@ public class Compra implements Serializable, CatalogoRemoto {
         }
     }
 
+    /**
+     * Este Metodo es para la opcion 1 del main "1. Mostrar catalogo", aquí mandamos a llamr
+     * a print catalogo para que imprima todos los catalogos-
+     */
     public Boolean mostrarCatalogo(String opcionUsuario, ZMAINCHEEMS main) {
         CatalogoElectrodom electrodom = new CatalogoElectrodom();
         CatalogoElectronica electronica = new CatalogoElectronica();
@@ -353,9 +395,9 @@ public class Compra implements Serializable, CatalogoRemoto {
      * obtiene su descripcion y su precio y
      * nos devuelve el ticket de la compra.
      * 
-     * @param comida la comida del usuario.
+     * @param producto la producto del usuario.
      */
-    public Boolean imprimirTicket(Productos comida, String opcionUsuario) {
+    public Boolean imprimirTicket(Productos producto, String opcionUsuario) {
         Cliente usuario = acceso.obtenerCliente((opcionUsuario));
         String nacionalidad = usuario.getNacionalidad();
         Boolean imprimir = false;
@@ -363,22 +405,22 @@ public class Compra implements Serializable, CatalogoRemoto {
             case "Español":
                 main.cambiaVista(new VistaEspanol());
                 System.out.println("\n--------- Sus insumos son: -----------");
-                System.out.println(comida.getDescripcion());
-                System.out.println("Con un total de: $" + comida.getPrecio());
+                System.out.println(producto.getDescripcion());
+                System.out.println("Con un total de: $" + producto.getPrecio());
                 imprimir = true;
                 break;
             case "Mexicano":
                 main.cambiaVista(new VistaMexa());
                 System.out.println("\n--------- Su despensa es: -----------");
-                System.out.println(comida.getDescripcion());
-                System.out.println("Total: $" + comida.getPrecio());
+                System.out.println(producto.getDescripcion());
+                System.out.println("Total: $" + producto.getPrecio());
                 imprimir = true;
                 break;
             case "Estadounidense":
                 main.cambiaVista(new VistaGringo());
                 System.out.println("\n--------- Your products are: -----------");
-                System.out.println(comida.getDescripcion());
-                System.out.println("Total: $" + comida.getPrecio());
+                System.out.println(producto.getDescripcion());
+                System.out.println("Total: $" + producto.getPrecio());
                 imprimir = true;
                 break;
             case "cancelado":
@@ -391,6 +433,12 @@ public class Compra implements Serializable, CatalogoRemoto {
         return imprimir;
     }
 
+   /**
+    * Presenta las opciones disponibles para el usuario según su nacionalidad y cambia la 
+    * vista principal para imprimir las opciones correspondientes de cada cliente.
+    * @param opcionUsuario La opción de usuario que nos ayuda a obtener su nacionalidad.
+    * @param main          Instancia de ZMAINCHEEMS que representa la vista principal del programa.
+    */
     public void opciones(String opcionUsuario, ZMAINCHEEMS main) {
         Cliente usuario = acceso.obtenerCliente((opcionUsuario));
         String nacionalidad = usuario.getNacionalidad();
@@ -412,8 +460,13 @@ public class Compra implements Serializable, CatalogoRemoto {
         }
     }
 
-    // PENDIENTE ESTA MAL
-
+   /**
+    * Presenta las opciones del catálogo según la nacionalidad del usuario y permite al usuario
+    *  realizar una acción, ya sea regresar al menu principal o salir del programa.
+    * @param opcionUsuario La opción de usuario asociada al cliente, nos ayuda a obtener el cliente.
+    * @param main          Instancia de ZMAINCHEEMS que representa la vista principal del programa.
+    * @return true si el usuario elige cerrar el programa, false si elige regresar al menú principal o si ocurre un error.
+    */
     public Boolean opcionesCatalogo(String opcionUsuario, ZMAINCHEEMS main) {
         Boolean bool = false;
         Cliente usuario = acceso.obtenerCliente((opcionUsuario));
@@ -466,11 +519,6 @@ public class Compra implements Serializable, CatalogoRemoto {
                     bool = true;
                     System.out.println("       ######### Closing the program #########");
                 }
-                // } catch (Exception e) {
-                // System.out.println("Error: You must enter an integer.");
-                // System.out.println(" ----- Returning to the main menu -----");
-                // bool = false;
-                // }
                 break;
             default:
                 System.out.println("No seleccionaste una opción válida ):");

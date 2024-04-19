@@ -8,43 +8,87 @@ import java.util.Scanner;
  * deja comprar.
  */
 public class ZMAINCHEEMS {
+    /**
+     * Nuestro objeto que cambiará las vistas.
+     */
     private VistaCliente ditto;
 
+    /**
+     * El metodo cambiaVista nos ayuda a como su nombre lo indica, escoger
+     * una vista según el cliente que deseamos mostrar.
+     */
     public void cambiaVista(VistaCliente nuevaVista) {
         ditto = nuevaVista;
     }
 
+    /**
+     * El metodo saludar() manda a llamar al metodo mostrarSaludo según
+     * la vista que tenga el ditto, es decir saluda según el idioma del
+     * cliente
+     * @return el saludo al cliente.
+     */
     public String saludar() {
         return ditto.mostrarSaludo();
     }
 
+    /**
+     * El metodo despedir() manda a llamar al metodo mostrarDespedida() según
+     * la vista que tenga el ditto, es decir saluda según el idioma del
+     * cliente
+     * @return la despedida al cliente.
+     */
     public String despedir() {
         return ditto.mostrarDespedida();
     }
 
+    /**
+     * El metodo opciones() manda a llamar al metodo opciones() según
+     * la vista que tenga el ditto, es decir muestra las opciones del catalogo
+     * según el idioma del cliente
+     * @return las opciones del menu del cliente.
+     */
     public String opciones() {
         return ditto.opciones();
     }
 
+    /**
+     * El metodo opcionesCatalogo() manda a llamar al metodo opcionesCatalogo() 
+     * según la vista que tenga el ditto, es decir muestra las opciones del catalogo
+     * según el idioma del cliente
+     * @return las opciones del catalogo.
+     */
     public String opcionesCatalogo() {
         return ditto.opcionesCatalogo();
     }
 
+     /**
+     * El metodo completarCompra() manda a llamar al metodo completarCompra() 
+     * según la vista que tenga el ditto, es decir muestra la forma de terminar
+     * la compra según el idioma del cliente
+     * @return la instrucciones para completar la compra
+     */
     public String completarCompra() {
         return ditto.completarCompra();
     }
 
+     /**
+     * El metodo darFechaEntrega() manda a llamar al metodo darFechaEntrega() 
+     * según la vista que tenga el ditto, es decir muestra la fecha de entrega 
+     * de los productos según el idioma del cliente.
+     * @return la fecha de entrega de los productos.
+     */
     public String darFechaEntrega() {
         return ditto.darFechaEntrega();
     }
 
     public static void main(String[] args) {
+        // Iniciamos una instancia del main para poder usar los metodos anteriores.
         ZMAINCHEEMS main = new ZMAINCHEEMS();
-        // creacion de cliente
+        // iniciamos una instancia de la clase que nos da el acceso al programa
         AccesoPrograma acceso = new AccesoPrograma();
 
         Scanner scanner = new Scanner(System.in);
-
+// Esto solo es tal cuál para que se vea bonito
         System.out.println("\u001B[33m╔══════════════════════════╗");
         System.out.println("║       Bienvenido a       ║");
         System.out.println("║        \u001B[32mCheemSmart \u001B[33m       ║");
@@ -53,7 +97,13 @@ public class ZMAINCHEEMS {
         System.out.println("Please enter your username:");
         String opcionUsuario = scanner.nextLine();
 
-        // Buscar el nombre en los clientes
+        /**
+         * Busca el nombre en los clientes en el arreglo de AccesoPrograma 
+         *  según lo que le escribamos en la terminal, de no encontrar al cliente
+         * nos dice que el nombre de usuario es incorrecto en ambos idiomas pues no sabemos
+         * aún la nacionalidad del cliente. Una vez verificamos que el cliente existe 
+         * pedimos la contraseña del mismo.
+         * */ 
         boolean usuarioBool = false;
         while (usuarioBool == false) {
             if (acceso.contieneUsuario(opcionUsuario) == false) {
@@ -85,6 +135,11 @@ public class ZMAINCHEEMS {
                         System.out.println("No seleccionaste una opción válida ):");
                 }
 
+                /**
+                 * Esta es la parte que recibe la contraseña desde la terminal y la 
+                 * compara con la contraseña del cliente, de ser correcta avanzamos, de no
+                 * serlo se repite el bucle.
+                 */
                 String opcionContrasena = scanner.nextLine();
                 Boolean contrasenaBool = false;
                 while (contrasenaBool == false) {
@@ -94,8 +149,12 @@ public class ZMAINCHEEMS {
         }
 
         /**
-         * Switch con las opciones posibles del menu, crea un objeto de la Clase Prepara
-         * y manda a llamar al metodo especifico que nos ayuda a escoger cada alimento.
+         * Switch con las opciones posibles del menu, crea un objeto de la Clase Compra
+         * y manda a llamar al metodo especifico según lo que escriba el cliente, 1 para
+         * ver el catalogo, 2 para comprar y 3 para salir, cada opcion aparece en el idioma
+         * del cliente. El catalogo no se muestra directamente al cliente, mandamos a llamar 
+         * a su proxy, además si le pasamos cualquier cosa que no sea un numero cerrará el
+         * programa.
          */
 
         Boolean catalogoBool = false;
